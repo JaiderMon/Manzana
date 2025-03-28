@@ -5,10 +5,8 @@ import numpy as np
 from PIL import Image
 import os
 
-# ⚠️ Configurar la página debe ser lo PRIMERO que hace Streamlit
 st.set_page_config(page_title="Detección de Enfermedades en Hojas 🍏", layout="centered")
 
-# **Carga del modelo**
 MODEL_PATH = r"C:\Users\JAIDER\Downloads\Ciencias de datos\ciencia_de_datos.h5"
 
 @st.cache_resource
@@ -25,13 +23,9 @@ def load_model():
     except Exception as e:
         st.error(f"❌ Error al cargar el modelo: {e}")
         return None
-
-# **Cargar modelo**
 model = load_model()
 
-# **Preprocesamiento de imagen**
 def preprocess_image(image):
-    """Preprocesa la imagen para que coincida con la entrada del modelo."""
     try:
         image = image.convert("RGB")  # Asegurar que tenga 3 canales (RGB)
         image = image.resize((256, 256))  # Cambiar tamaño a 256x256
@@ -43,9 +37,8 @@ def preprocess_image(image):
         return None
 
 
-# **Función de predicción**
+
 def predict_disease(image):
-    """Realiza la predicción de la enfermedad en la hoja."""
     if model is None:
         st.error("⚠️ No se pudo cargar el modelo.")
         return None, None
@@ -56,7 +49,6 @@ def predict_disease(image):
 
     prediction = model.predict(processed_image)
 
-    # ⚠️ Lista de clases (ajustar según el modelo)
     class_names = [
         'Apple___scab', 'Apple___black_rot', 'Apple___rust', 'Apple___healthy',
         'Apple___alternaria_leaf_spot', 'Apple___brown_spot', 'Apple___gray_spot'
@@ -67,11 +59,8 @@ def predict_disease(image):
 
     return predicted_class, confidence
 
-# **Interfaz de la aplicación**
 st.title("🍏 Detección de Enfermedades en Hojas de Manzana")
 st.write("Sube una imagen de una hoja de manzana para analizarla.")
-
-# **Subida de imagen**
 uploaded_image = st.file_uploader("📤 Sube una imagen", type=["jpg", "png", "jpeg"])
 
 if uploaded_image:
