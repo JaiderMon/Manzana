@@ -1,15 +1,29 @@
 
 import streamlit as st
+import tensorflow as tf
 import numpy as np
+import requests
 from PIL import Image
+import os
 
+# URL de descarga desde Google Drive (cambia el ID del archivo)
+FILE_ID = "1a2b3c4d5e6f7g8h9i0j"
+MODEL_PATH = "ciencia_de_datos.h5"
 
 @st.cache_resource
-def load_model():
-    # Update the path to include the full path to your model in Google Drive
-    model = tf.keras.models.load_model("/content/drive/MyDrive/ciencia_de_datos.h5")  
+def download_and_load_model():
+    if not os.path.exists(MODEL_PATH):
+        url = f"https://drive.google.com/uc?id={FILE_ID}"
+        response = requests.get(url, stream=True)
+        with open(MODEL_PATH, "wb") as file:
+            for chunk in response.iter_content(chunk_size=8192):
+                file.write(chunk)
+    
+    model = tf.keras.models.load_model(MODEL_PATH)
     return model
 
+# Cargar modelo
+model = download_and_load_model()
 
 # Función para preprocesar la imagen
 def preprocess_image(image):
@@ -24,7 +38,7 @@ def predict_disease(image):
     processed_image = preprocess_image(image)
     prediction = model.predict(processed_image)
     class_names = ['Apple___scab', 'Apple___black_rot', 'Apple___rust', 'Apple___healthy',
-    'Apple___alternaria_leaf_spot', 'Apple___brown_spot', 'Apple___gray_spot']  # Ajusta con las clases de tu modelo
+                   'Apple___alternaria_leaf_spot', 'Apple___brown_spot', 'Apple___gray_spot']  
     predicted_class = class_names[np.argmax(prediction)]
     confidence = np.max(prediction) * 100
     return predicted_class, confidence
@@ -43,3 +57,4 @@ if uploaded_image:
     if st.button("🔍 Analizar Imagen"):
         predicted_class, confidence = predict_disease(image)
         st.success(f"**Enfermedad detectada:** {predicted_class} ({confidence:.2f}%)")
+
