@@ -17,21 +17,6 @@ else:
 
 
 
-@st.cache_resource
-def load_model():
-    """Carga el modelo desde la ruta local."""
-    if not os.path.exists(MODEL_PATH):
-        st.error(f"⚠️ No se encontró el modelo en {MODEL_PATH}. Verifica la ruta.")
-        return None
-
-    try:
-        model = tf.keras.models.load_model(MODEL_PATH)
-        st.success("✅ Modelo cargado exitosamente.")
-        return model
-    except Exception as e:
-        st.error(f"❌ Error al cargar el modelo: {e}")
-        return None
-model = load_model()
 
 def preprocess_image(image):
     try:
