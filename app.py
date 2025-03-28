@@ -4,7 +4,11 @@ import numpy as np
 from PIL import Image
 
 
-model = load_model("ciencia_de_datos.h5")  # Example for TensorFlow/Keras models
+@st.cache_resource
+def load_model():
+    # Update the path to include the full path to your model in Google Drive
+    model = tf.keras.models.load_model("/content/drive/MyDrive/ciencia_de_datos.h5")  
+    return model
 
 
 # Función para preprocesar la imagen
