@@ -4,8 +4,11 @@ import numpy as np
 from PIL import Image
 
 
-# Cargar el modelo
-model= joblib.load("modelo_manzana.bin")
+@st.cache_resource
+def load_model():
+    # Update the path to include the full path to your model in Google Drive
+    model = tf.keras.models.load_model("/content/drive/MyDrive/ciencia_de_datos.h5")  
+    return model
 
 # Función para preprocesar la imagen
 def preprocess_image(image):
