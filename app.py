@@ -8,7 +8,7 @@ import os
 st.set_page_config(page_title="Detección de Enfermedades en Hojas 🍏", layout="centered")
 
 
-MODEL_PATH = tf.keras.models.load_model("ciencia_de_datos2.h5")
+MODEL_PATH = tf.keras.models.load_model(".devcontainer/ciencia_de_datos2.h5")
 
 
 if os.path.exists(MODEL_PATH):
