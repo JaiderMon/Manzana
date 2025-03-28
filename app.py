@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 
 
-model = load_model("path_to_your_model.h5")  # Example for TensorFlow/Keras models
+model = load_model("ciencia_de_datos.h5")  # Example for TensorFlow/Keras models
 
 
 # Función para preprocesar la imagen
