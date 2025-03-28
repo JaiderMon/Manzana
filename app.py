@@ -9,7 +9,7 @@ st.set_page_config(page_title="Detección de Enfermedades en Hojas 🍏", layout
 
 
 MODEL_URL = "https://raw.githubusercontent.com/JaiderMon/Manzana/main/ciencia_de_datos2.h5"
-MODEL_PATH = "ciencia_de_datos2.h5""
+MODEL_PATH = "ciencia_de_datos2.h5"
 
 if os.path.exists(MODEL_PATH):
     st.success("✅ El modelo está disponible en el entorno de ejecución.")
