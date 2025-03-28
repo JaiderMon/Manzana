@@ -1,5 +1,5 @@
 
 streamlit
 pandas
-tensorflow
+pip isntall tensorflow
 numpy
