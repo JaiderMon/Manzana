@@ -7,7 +7,13 @@ import os
 
 st.set_page_config(page_title="Detección de Enfermedades en Hojas 🍏", layout="centered")
 
-MODEL_PATH = r"Direccion del archivo ciencia_de_datos2.h5"
+
+MODEL_PATH = "ciencia_de_datos2.h5"
+
+if os.path.exists(MODEL_PATH):
+    st.success("✅ El modelo está disponible en el entorno de ejecución.")
+else:
+    st.error("⚠️ El modelo NO se encuentra en el entorno.")
 
 @st.cache_resource
 def load_model():
