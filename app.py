@@ -7,7 +7,7 @@ import os
 
 st.set_page_config(page_title="Detección de Enfermedades en Hojas 🍏", layout="centered")
 
-MODEL_PATH = r"https://github.com/JaiderMon/Manzana/blob/main/.devcontainer/ciencia_de_datos2.h5"
+MODEL_PATH = r"Direccion del archivo ciencia_de_datos2.h5"
 
 @st.cache_resource
 def load_model():
