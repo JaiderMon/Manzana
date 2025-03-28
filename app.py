@@ -22,7 +22,8 @@ def preprocess_image(image):
 def predict_disease(image):
     processed_image = preprocess_image(image)
     prediction = model.predict(processed_image)
-    class_names = ["Sana", "Roya", "Mildiu", "Tizón"]  # Ajusta con las clases de tu modelo
+    class_names = ['Apple___scab', 'Apple___black_rot', 'Apple___rust', 'Apple___healthy',
+    'Apple___alternaria_leaf_spot', 'Apple___brown_spot', 'Apple___gray_spot']  # Ajusta con las clases de tu modelo
     predicted_class = class_names[np.argmax(prediction)]
     confidence = np.max(prediction) * 100
     return predicted_class, confidence
