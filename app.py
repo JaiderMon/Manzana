@@ -7,8 +7,14 @@ import os
 
 st.set_page_config(page_title="Detección de Enfermedades en Hojas 🍏", layout="centered")
 
+MODEL_PATH = os.path.join(os.getcwd(), "models", "ciencia_de_datos2.h5")  # Ajusta según tu carpeta
 
-MODEL_PATH = tf.keras.models.load_model(".devcontainer/ciencia_de_datos2.h5")
+if not os.path.exists(MODEL_PATH):
+    st.error(f"❌ No se encontró el modelo en {MODEL_PATH}. Verifica la ruta.")
+else:
+    model = tf.keras.models.load_model(MODEL_PATH)
+    st.success("✅ Modelo cargado exitosamente.")
+
 
 
 @st.cache_resource
