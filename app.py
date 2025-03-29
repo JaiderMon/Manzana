@@ -7,7 +7,7 @@ import os
 
 st.set_page_config(page_title="Detección de Enfermedades en Hojas 🍏", layout="centered")
 
-MODEL_PATH = os.path.join(os.getcwd(), "ciencia_de_datos3.tflite")  # Ajusta según tu carpeta
+MODEL_PATH = os.path.join(os.getcwd(), ".devcontainer", "ciencia_de_datos2.h5")  
 
 if not os.path.exists(MODEL_PATH):
     st.error(f"❌ No se encontró el modelo en {MODEL_PATH}. Verifica la ruta.")
@@ -20,10 +20,10 @@ else:
 
 def preprocess_image(image):
     try:
-        image = image.convert("RGB")  # Asegurar que tenga 3 canales (RGB)
-        image = image.resize((256, 256))  # Cambiar tamaño a 256x256
-        image = np.array(image) / 255.0   # Normalizar a rango [0,1]
-        image = np.expand_dims(image, axis=0)  # Agregar dimensión batch (1, 256, 256, 3)
+        image = image.convert("RGB")  
+        image = image.resize((256, 256))  
+        image = np.array(image) / 255.0  
+        image = np.expand_dims(image, axis=0)  
         return image
     except Exception as e:
         st.error(f"❌ Error al procesar la imagen: {e}")
